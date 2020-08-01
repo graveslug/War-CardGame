@@ -1,5 +1,8 @@
+const $result = $('#result'); //ties dom to javascript indefiently
+
 
 //Default array: an array that holds 52 numbers that contains 4 repeats of each number from 1-13
+
 const deck = [1,1,1,1,
                 2,2,2,2,
                 3,3,3,3,
@@ -13,31 +16,28 @@ const deck = [1,1,1,1,
                 11,11,11,11,
                 12,12,12,12,
                 13,13,13,13
-            ]
+]
 
     //computer array
     let computer = []
     //player array
     let player = []
+    //storing double numbers
+    let doubleNumber = []
 
-        //startgame function//
-    const startGame = () => {
-        // shuffleDeck()
-        //playCard()
-    }
+
+
 
 const splitDeck = (deck) => {
         //splits array in half
-        const split = Math.ceil(deck.length / 2)
+        const split = deck.length / 2
         //inputs first half into player array
         player = deck.splice(0, split)
         //inputs second half into computer array
         computer = deck.splice(- split)
         // console.log(player)
         // console.log(computer)
-
-    }
-
+}
 
 //a function that mutates the array by randomizing it.
 const shuffleDeck = (deck) => {
@@ -62,52 +62,8 @@ shuffleDeck(deck) //testing for shuffleDeck.
 // console.log(player)
 // console.log(computer)
 
-
-//MAY NOT NEED THIS FUNCTION
-//this function acts as my secondary number puller when numbers are equal to one another.
-// const doubleNumber = () => {
-//     //pulls one more number from the arrays
-//     //compares them
-//     //if double then call on self doubleNumber() passing both arrays into itself
-//     //otherwise highest number wins.
-//     //pushes all numbers to winners array
-// }
-
-
-
-//play card FUNCTION
-const playCard = () => {
-    //on each turn when a player selects the play button or maybe a card click later the
-    //first number of the array is 'played'
-    // storing first number of the player array
-    let playerNum = player.shift()
-    //// storing first number of the computer array
-    let computerNum = computer.shift()
-    //then these numbers are compared and the highest number wins thus both numbers pushed onto the end of the winners array.
-    if (playerNum === computerNum) {
-        //if num === num call doubleNumber()
-        console.log('WAAAAAARRRRRRR!!!!!')
-        playCard()
-        console.log(playerNum)
-        console.log(computerNum)
-        //taking a guess that i'd have to find a way push all numbers but we will see.
-    } else if (playerNum > computerNum){
-        console.log(`Your card is higher!`)
-        //return both numbers to player via push()
-        //most likely playerNum.push() && computerNum.push() to player array
-        console.log(playerNum)
-        console.log(computerNum)
-    } else {
-        console.log(`Their card is higher!`)
-        //return both numbers to computer via push()
-        //most likely playerNum.push() && computerNum.push() to computer array
-        console.log(playerNum)
-        console.log(computerNum)
-
-    }
-}
-playCard()
 //current card function
+//change argument to player or computer passing in that specific argument.length. aka split it up seperately
 const currentCardCounter = (player, computer) =>{
     //player array length counted then display
     for (let i = 0; i < player.length; i++) {
@@ -115,13 +71,10 @@ const currentCardCounter = (player, computer) =>{
     }
     //computer array length counted then display
     for (let i = 0; i < computer.length; i++) {
+        //computer.length
         return computer.length
     }
-    //computer.length
 }
-console.log(currentCardCounter(player))
-console.log(currentCardCounter(computer))
-
 
 //win condition: when one array reaches 52.
 const checkWin = () => {
@@ -135,10 +88,71 @@ const checkWin = () => {
         //you lose!
         console.log('You lose!') //test. change to displaya  modal or something
     } else{
-        //maybe playCard() or break or currentCardCounter()
+        playCard()
     }
-    //LATER: probaly should make this more dynamic.
 }
 
+//play card FUNCTION
+const playCard = () => {
+    let playerNum = player.shift()
+    // console.log(playerNum)
+    //// storing first number of the computer array
+    let computerNum = computer.shift()
+    // console.log(computerNum)
+    //then these numbers are compared and the highest number wins thus both numbers pushed onto the end of the winners array.
+    if (playerNum === computerNum) {
+        //if num === num call doubleNumber()
+        console.log('WAAAAAARRRRRRR!!!!!')
+        doubleNumber.push(playerNum, computerNum)
+        // console.log(doubleNumber)
+        playCard()
+        // console.log(playerNum)
+        // console.log(computerNum)
+        //console.log(doubleNumber)
+    } else if (playerNum > computerNum){
+        console.log(`Your card is higher!`)
+        //return both numbers to player via push()
+        player.push(playerNum, computerNum, ...doubleNumber)
+        doubleNumber = []
+        // player.push(doubleNumber)
+        //most likely playerNum.push() && computerNum.push() to player array
+        // console.log(doubleNumber)
+        // console.log(player)
+        // console.log(computer)
+    } else {
+        console.log(`Their card is higher!`)
+        //return both numbers to computer via push()
+        //most likely playerNum.push() && computerNum.push() to computer array
+        // console.log(doubleNumber)
+        computer.push(computerNum, playerNum, ...doubleNumber)
+        doubleNumber = []
+        // computer.concat(doubleNumber)
+        // console.log(player)
+        // console.log(computer)
+
+
+    }
+}
+
+//startgame function//
+const startGame = () => {
+    // shuffleDeck()
+    while (player.length > 0 && computer.length > 0){
+        playCard()
+
+    }
+    console.log(player)
+    console.log(computer)
+    if (player.length > 0) {
+        console.log('Player won!')
+        $result.text('Player won')
+    } else {
+        console.log('Computer won!')
+        $result.text('computer won')
+    }
+}
+//console.log(doubleNumber)
+// console.log(currentCardCounter(player))
+// console.log(currentCardCounter(computer))
 
 startGame()
