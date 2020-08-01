@@ -16,14 +16,27 @@ const deck = [1,1,1,1,
             ]
 
     //computer array
-    const computer = []
+    let computer = []
     //player array
-    const player = []
+    let player = []
 
         //startgame function//
     const startGame = () => {
-        //shuffleDeck()
+        // shuffleDeck()
     }
+
+const splitDeck = (deck) => {
+        //splits array in half
+        const split = Math.ceil(deck.length / 2)
+        //inputs first half into player array
+        player = deck.splice(0, split)
+        //inputs second half into computer array
+        computer = deck.splice(- split)
+        // console.log(player)
+        // console.log(computer)
+
+    }
+
 
 //a function that mutates the array by randomizing it.
 const shuffleDeck = (deck) => {
@@ -40,18 +53,13 @@ const shuffleDeck = (deck) => {
         deck[j] = tempValue
         //console.log(deck)
     }
-    //now how to divide that. Hmm. Maybe passing it the divideCards function. Next path?
-    //calls divideCards() passing the shuffled array into it.
+    splitDeck(deck) //passing the shuffled array into it.
 }
-//shuffleDeck(deck) //testing for shuffleDeck.
+shuffleDeck(deck) //testing for shuffleDeck.
 
-const divideCards = () => {
-    //splits array in half
-    //inputs first half into computer array
-    //inputs second half into player array
 
-}
-
+// console.log(player)
+// console.log(computer)
 
 //this function acts as my secondary number puller when numbers are equal to one another.
 const doubleNumber = () => {
@@ -75,13 +83,19 @@ const playCard = () => {
 }
 
 //current card function
-const currentCardCounter = () =>{
-    //computer array length counted then display
-    //computer.length
-
+const currentCardCounter = (player, computer) =>{
     //player array length counted then display
-    //player.length
+    for (let i = 0; i < player.length; i++) {
+        return player.length
+    }
+    //computer array length counted then display
+    for (let i = 0; i < computer.length; i++) {
+        return computer.length
+    }
+    //computer.length
 }
+console.log(currentCardCounter(player))
+console.log(currentCardCounter(computer))
 
 
 //win condition: when one array reaches 52.
@@ -102,4 +116,4 @@ const checkWin = () => {
 }
 
 
-//startGame()
+startGame()
