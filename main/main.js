@@ -23,6 +23,7 @@ const deck = [1,1,1,1,
         //startgame function//
     const startGame = () => {
         // shuffleDeck()
+        //playCard()
     }
 
 const splitDeck = (deck) => {
@@ -61,27 +62,51 @@ shuffleDeck(deck) //testing for shuffleDeck.
 // console.log(player)
 // console.log(computer)
 
+
+//MAY NOT NEED THIS FUNCTION
 //this function acts as my secondary number puller when numbers are equal to one another.
-const doubleNumber = () => {
-    //pulls one more number from the arrays
-    //compares them
-    //if double then call on self doubleNumber() passing both arrays into itself
-    //otherwise highest number wins.
-    //pushes all numbers to winners array
-}
+// const doubleNumber = () => {
+//     //pulls one more number from the arrays
+//     //compares them
+//     //if double then call on self doubleNumber() passing both arrays into itself
+//     //otherwise highest number wins.
+//     //pushes all numbers to winners array
+// }
 
 
 
 //play card FUNCTION
 const playCard = () => {
-    //on each turn when a player selects the play button or maybe a card click later the first number of the array is 'played'in the computer array and the player array.
-
+    //on each turn when a player selects the play button or maybe a card click later the
+    //first number of the array is 'played'
+    // storing first number of the player array
+    let playerNum = player.shift()
+    //// storing first number of the computer array
+    let computerNum = computer.shift()
     //then these numbers are compared and the highest number wins thus both numbers pushed onto the end of the winners array.
+    if (playerNum === computerNum) {
+        //if num === num call doubleNumber()
+        console.log('WAAAAAARRRRRRR!!!!!')
+        playCard()
+        console.log(playerNum)
+        console.log(computerNum)
+        //taking a guess that i'd have to find a way push all numbers but we will see.
+    } else if (playerNum > computerNum){
+        console.log(`Your card is higher!`)
+        //return both numbers to player via push()
+        //most likely playerNum.push() && computerNum.push() to player array
+        console.log(playerNum)
+        console.log(computerNum)
+    } else {
+        console.log(`Their card is higher!`)
+        //return both numbers to computer via push()
+        //most likely playerNum.push() && computerNum.push() to computer array
+        console.log(playerNum)
+        console.log(computerNum)
 
-    //if num === num call doubleNumber()
-
+    }
 }
-
+playCard()
 //current card function
 const currentCardCounter = (player, computer) =>{
     //player array length counted then display
