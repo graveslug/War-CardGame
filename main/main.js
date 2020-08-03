@@ -1,4 +1,18 @@
-const $result = $('#result'); //ties dom to javascript indefiently
+//ties dom to javascript indefiently
+const $result = $('#result');
+const $playerDeckNumber = $('#player-deck-number')
+const $computerDeckNumber = $('#computer-deck-number')
+//not hooked up
+const $themeSwitcher = $('#theme-switcher')
+const $playGame = $('#playGame') //player clicks card and draws card
+const $roundResult = $('#round-result')
+//not hooked up
+const $restart = $('#restart')
+//not hooked up
+const $playerCards = $('.player-cards')
+//not hooked up
+const $computerCards = $('.computer-cards')
+const $burzumWar = $('#burzum-war')
 
 
 //Default array: an array that holds 52 numbers that contains 4 repeats of each number from 1-13
@@ -18,14 +32,17 @@ const deck = [1,1,1,1,
                 13,13,13,13
 ]
 
+
     //computer array
     let computer = []
+    //puts the image onto the card
+    //$('#computerCards').css('background-image', `/img/card${num}.png`)
     //player array
     let player = []
+    //puts the image onto the card
+    //$('#playerCards').css('background-image', `/img/card${num}.png`)
     //storing double numbers
     let doubleNumber = []
-
-
 
 
 const splitDeck = (deck) => {
@@ -56,32 +73,15 @@ const shuffleDeck = (deck) => {
     }
     splitDeck(deck) //passing the shuffled array into it.
 }
-shuffleDeck(deck) //testing for shuffleDeck.
-
-
 // console.log(player)
 // console.log(computer)
-
-//current card function
-//change argument to player or computer passing in that specific argument.length. aka split it up seperately
-const currentCardCounter = (player, computer) =>{
-    //player array length counted then display
-    for (let i = 0; i < player.length; i++) {
-        return player.length
-    }
-    //computer array length counted then display
-    for (let i = 0; i < computer.length; i++) {
-        //computer.length
-        return computer.length
-    }
-}
 
 //win condition: when one array reaches 52.
 const checkWin = () => {
     //if player === 52 && computer === 0
     if (player.length === 52 && computer.length === 0) {
         //YOU WIN!
-        console.log('you win') //test. change to display a modal or something
+        console.log('you win')
 
         //else if player === 0 && computer === 52
     } else if (player.length === 0 && computer.length === 52){
@@ -94,15 +94,20 @@ const checkWin = () => {
 
 //play card FUNCTION
 const playCard = () => {
+    $computerDeckNumber.text(`${computer.length} cards left.`)
+    $playerDeckNumber.text(`${player.length} cards left.`)
     let playerNum = player.shift()
     // console.log(playerNum)
     //// storing first number of the computer array
     let computerNum = computer.shift()
     // console.log(computerNum)
-    //then these numbers are compared and the highest number wins thus both numbers pushed onto the end of the winners array.
     if (playerNum === computerNum) {
-        //if num === num call doubleNumber()
-        console.log('WAAAAAARRRRRRR!!!!!')
+        $burzumWar.text('WAAAAAARRRR!')
+
+        setTimeout(() => {
+            $burzumWar.text('')
+        }, 1000)
+
         doubleNumber.push(playerNum, computerNum)
         // console.log(doubleNumber)
         playCard()
@@ -110,49 +115,63 @@ const playCard = () => {
         // console.log(computerNum)
         //console.log(doubleNumber)
     } else if (playerNum > computerNum){
-        console.log(`Your card is higher!`)
+        //console.log(`Your card is higher!`)
         //return both numbers to player via push()
         player.push(playerNum, computerNum, ...doubleNumber)
         doubleNumber = []
+        $roundResult.text('You won the round')
         // player.push(doubleNumber)
         //most likely playerNum.push() && computerNum.push() to player array
         // console.log(doubleNumber)
         // console.log(player)
         // console.log(computer)
     } else {
-        console.log(`Their card is higher!`)
+        //console.log(`Their card is higher!`)
         //return both numbers to computer via push()
         //most likely playerNum.push() && computerNum.push() to computer array
         // console.log(doubleNumber)
         computer.push(computerNum, playerNum, ...doubleNumber)
         doubleNumber = []
+        $roundResult.text('The computer won the round!')
+
         // computer.concat(doubleNumber)
         // console.log(player)
         // console.log(computer)
-
-
     }
 }
 
 //startgame function//
 const startGame = () => {
-    // shuffleDeck()
-    while (player.length > 0 && computer.length > 0){
         playCard()
-
-    }
-    console.log(player)
-    console.log(computer)
+    //console.log(player)
+    //console.log(computer)
     if (player.length > 0) {
-        console.log('Player won!')
         $result.text('Player won')
+
+        setTimeout(() => {
+            $result.text('')
+        }, 1000)
+
     } else {
-        console.log('Computer won!')
-        $result.text('computer won')
+        $result.text('Computer won!')
+
+        setTimeout(() => {
+            $result.text('')
+        }, 1000)
+
     }
 }
 //console.log(doubleNumber)
 // console.log(currentCardCounter(player))
 // console.log(currentCardCounter(computer))
 
+
+shuffleDeck(deck)
 startGame()
+
+// EVENT LISTENER PARTY FOR THE COOL KIDS //
+$playGame.on('click', startGame)
+$($restart).click(function() {
+    location.reload();
+});
+//$burzumWar.text('WAAAAAARRRR!')

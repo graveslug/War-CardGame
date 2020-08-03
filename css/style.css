@@ -1,0 +1,39 @@
+/* Possible way to stack the cards ontop of eachother :Z index on the stack, x and y coords to offset by a cpl pixels to show the cards under? */
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    background-color: ghostwhite;
+}
+.cardHolder{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.card-frame{
+    display: flex;
+    width: 150px;
+    height: 250px;
+    background: grey;
+    margin: auto;
+
+}
+
+#player-deck-number {
+    margin-left: 40px;
+}
+
+#theme-switcher {
+    border-radius: 50%;
+    height: 1.3em;
+}
+.button-bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
