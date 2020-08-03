@@ -6,13 +6,9 @@ const $computerDeckNumber = $('#computer-deck-number')
 const $themeSwitcher = $('#theme-switcher')
 const $playGame = $('#playGame') //player clicks card and draws card
 const $roundResult = $('#round-result')
-//not hooked up
 const $restart = $('#restart')
-//not hooked up
-const $playerCards = $('.player-cards')
-//not hooked up
-const $computerCards = $('.computer-cards')
-const $burzumWar = $('#burzum-war')
+
+const $burzumWar = $('#burzum-war')//not hookedup
 
 
 //Default array: an array that holds 52 numbers that contains 4 repeats of each number from 1-13
@@ -36,11 +32,11 @@ const deck = [1,1,1,1,
     //computer array
     let computer = []
     //puts the image onto the card
-    //$('#computerCards').css('background-image', `/img/card${num}.png`)
+    // $('#computer-cards').css('background-image', `War-CardGame/img/gray_back${0}.png`)
     //player array
     let player = []
     //puts the image onto the card
-    //$('#playerCards').css('background-image', `/img/card${num}.png`)
+    // $('#player-cards').css('background-image', `War-CardGame/img/gray_back${0}.png`)
     //storing double numbers
     let doubleNumber = []
 
@@ -161,6 +157,7 @@ const startGame = () => {
 
     }
 }
+
 //console.log(doubleNumber)
 // console.log(currentCardCounter(player))
 // console.log(currentCardCounter(computer))
@@ -174,4 +171,5 @@ $playGame.on('click', startGame)
 $($restart).click(function() {
     location.reload();
 });
+
 //$burzumWar.text('WAAAAAARRRR!')
