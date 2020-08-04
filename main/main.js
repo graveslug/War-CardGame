@@ -7,10 +7,12 @@ const $themeSwitcher = $('#theme-switcher')
 const $playGame = $('#playGame') //player clicks card and draws card
 const $roundResult = $('#round-result')
 const $restart = $('#restart')
-
-const $burzumWar = $('#burzum-war')//not hookedup
-
-
+const $playerCards = $('.player-cards')
+const $computerCards = $('.computer-cards')
+const $burzumWar = $('#burzum-war')
+const $title = $('.title')
+const $playerNum = $('#player-num')
+const $computerNum = $('#computer-num')
 //Default array: an array that holds 52 numbers that contains 4 repeats of each number from 1-13
 
 const deck = [1,1,1,1,
@@ -28,15 +30,14 @@ const deck = [1,1,1,1,
                 13,13,13,13
 ]
 
-
     //computer array
     let computer = []
     //puts the image onto the card
-    // $('#computer-cards').css('background-image', `War-CardGame/img/gray_back${0}.png`)
+    $($computerCards).prepend(`<img id='baseSkull' src='./img/GS-ice-skull-number-plate.png'/>`)
     //player array
     let player = []
     //puts the image onto the card
-    // $('#player-cards').css('background-image', `War-CardGame/img/gray_back${0}.png`)
+    $($playerCards).prepend(`<img id='baseSkull' src='./img/GS-ash-skull-number-plate.png'/>`)
     //storing double numbers
     let doubleNumber = []
 
@@ -90,19 +91,22 @@ const checkWin = () => {
 
 //play card FUNCTION
 const playCard = () => {
-    $computerDeckNumber.text(`${computer.length} cards left.`)
-    $playerDeckNumber.text(`${player.length} cards left.`)
+    $computerDeckNumber.text(`${computer.length} minions`)
+    $playerDeckNumber.text(`${player.length} minions`)
     let playerNum = player.shift()
     // console.log(playerNum)
     //// storing first number of the computer array
     let computerNum = computer.shift()
+    //displays number on forehead of skull
+    $computerNum.text(computerNum)
+    $playerNum.text(playerNum)
     // console.log(computerNum)
     if (playerNum === computerNum) {
         $burzumWar.text('WAAAAAARRRR!')
 
         setTimeout(() => {
             $burzumWar.text('')
-        }, 1000)
+        }, 2000)
 
         doubleNumber.push(playerNum, computerNum)
         // console.log(doubleNumber)
@@ -115,7 +119,7 @@ const playCard = () => {
         //return both numbers to player via push()
         player.push(playerNum, computerNum, ...doubleNumber)
         doubleNumber = []
-        $roundResult.text('You won the round')
+        $roundResult.text('You won the fight!')
         // player.push(doubleNumber)
         //most likely playerNum.push() && computerNum.push() to player array
         // console.log(doubleNumber)
@@ -128,7 +132,7 @@ const playCard = () => {
         // console.log(doubleNumber)
         computer.push(computerNum, playerNum, ...doubleNumber)
         doubleNumber = []
-        $roundResult.text('The computer won the round!')
+        $roundResult.text('They won the fight!')
 
         // computer.concat(doubleNumber)
         // console.log(player)
@@ -141,22 +145,25 @@ const startGame = () => {
         playCard()
     //console.log(player)
     //console.log(computer)
-    if (player.length > 0) {
-        $result.text('Player won')
+    if (player.length === 52 && computer.length === 0) {
+        $result.text('You\'ve won the war lich!')
 
         setTimeout(() => {
             $result.text('')
-        }, 1000)
-
-    } else {
-        $result.text('Computer won!')
+        }, 2000)
+        startGame()
+    } else if (player.length === 0) {
+        $result.text('You\'ve lost the battle lich!')
 
         setTimeout(() => {
             $result.text('')
-        }, 1000)
-
+        }, 2000)
+        startGame()
     }
 }
+// const themeSwitcher = () => {
+//     // $(somethingsomething).toggleClass(something)
+// }
 
 //console.log(doubleNumber)
 // console.log(currentCardCounter(player))
@@ -167,7 +174,7 @@ shuffleDeck(deck)
 startGame()
 
 // EVENT LISTENER PARTY FOR THE COOL KIDS //
-$playGame.on('click', startGame)
+$($playGame).on('click', startGame)
 $($restart).click(function() {
     location.reload();
 });

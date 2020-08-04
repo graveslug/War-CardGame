@@ -5,7 +5,7 @@ html {
 
 *, *::before, *::after {
     box-sizing: inherit;
-    background-color: ghostwhite;
+    background: gray;
 }
 
 #theme-switcher {
@@ -17,7 +17,9 @@ html {
     width: 100%;
     justify-content: space-between;
 }
-
+.title img {
+    max-width: 100%;
+}
 .cardHolder{
     display:flex;
     flex-direction: column;
@@ -27,44 +29,26 @@ html {
 
 .computer-cards, .player-cards{
     display: flex;
-    width: 150px;
+    /* width: 150px;
     height: 250px;
-    margin: auto;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    webkit-transition: transform 1.5s; /* Safari and Chrome */
-    transition: transform 1.5s;
-    transform-style: preserve-3d;
+    margin: auto; */
+}
+.player-cards {
+    cursor: pointer;
+}
+#result, #burzum-war, #round-result {
+    min-height: 1.2rem;
+}
+#computer-num, #player-num{
+    position: relative;
+    right: 125px; /* adjust these later */
+    top: 15px;
+    font-size: 20px;
+    background: none;
+    min-width: 1.5rem;
 }
 
-.computer-cards:hover, .player-cards:hover {
-    transform: rotateY(-180deg)
-}
 
-.front {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #cc3333;
-    backface-visibility: hidden;
-
-    color: #fff;
-    text-align: center;
-    line-height: 208px;
-    font-family: monospace;
-}
-
-.back{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #999999;
-    backface-visibility: hidden;
-
-    color: #fff;
-    text-align: center;
-    line-height: 208px;
-    font-family: monospace;
-    -ms-transform: rotateY(-180deg);
-    -webkit-transform: rotateY(-180deg);
+/* .computer-cards:hover, .player-cards:hover {
     transform: rotateY(-180deg);
-}
+} */
