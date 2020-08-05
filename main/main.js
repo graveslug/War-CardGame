@@ -75,10 +75,19 @@ const shuffleDeck = (deck) => {
 const checkWin = () => {
 
     if (player.length === 52 && computer.length === 0) {
-        prompt('You won the Necromancers war!')
+        $result.text('You\'ve won the war lich!')
+
+        setTimeout(() => {
+            $result.text('')
+        }, 2000)
 
     } else if (player.length === 0 && computer.length === 52){
-        prompt('You lost the Necromancers War!')
+        $result.text('You\'ve lost the battle lich!')
+
+        setTimeout(() => {
+            $result.text('')
+        }, 2000)
+
     } else{
         playCard()
     }
@@ -127,18 +136,10 @@ const startGame = () => {
         playCard()
 
     if (player.length === 52 && computer.length === 0) {
-        $result.text('You\'ve won the war lich!')
-
-        setTimeout(() => {
-            $result.text('')
-        }, 2000)
+        checkWin()
 
     } else if (player.length === 0) {
-        $result.text('You\'ve lost the battle lich!')
-
-        setTimeout(() => {
-            $result.text('')
-        }, 2000)
+        checkWin()
 
     }
 }
