@@ -79,14 +79,14 @@ const checkWin = () => {
 
         setTimeout(() => {
             $result.text('')
-        }, 2000)
+        }, 6000)
 
-    } else if (player.length === 0 && computer.length >= 52){
+    } else if (player.length === 0 && computer.length === 52){
         $result.text('You\'ve lost the battle lich!')
 
         setTimeout(() => {
             $result.text('')
-        }, 2000)
+        }, 6000)
 
     } else{
         playCard()
