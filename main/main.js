@@ -74,14 +74,14 @@ const shuffleDeck = (deck) => {
 //win condition: when one array reaches 52.
 const checkWin = () => {
 
-    if (player.length === 52 && computer.length === 0) {
+    if (player.length === 53 && computer.length === 0) {
         $result.text('You\'ve won the war lich!')
 
         setTimeout(() => {
             $result.text('')
         }, 6000)
 
-    } else if (player.length === 0 && computer.length === 52){
+    } else if (player.length === 0 && computer.length === 53){
         $result.text('You\'ve lost the battle lich!')
 
         setTimeout(() => {
@@ -133,7 +133,7 @@ const playCard = () => {
 
 //startgame function//
 const startGame = () => {
-    if (player.length === 52 && computer.length === 0) {
+    if (player.length === 53 && computer.length === 0) {
         checkWin()
 
     } else if (player.length === 0) {
