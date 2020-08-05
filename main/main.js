@@ -74,7 +74,7 @@ const shuffleDeck = (deck) => {
 //win condition: when one array reaches 52.
 const checkWin = () => {
 
-    if (player.length >= 52 && computer.length === 0) {
+    if (player.length === 52 && computer.length === 0) {
         $result.text('You\'ve won the war lich!')
 
         setTimeout(() => {
