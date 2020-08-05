@@ -1,4 +1,4 @@
-//Constaly making jQuery
+//Constanly making jQuery
 const $result = $('#result');
 const $playerDeckNumber = $('#player-deck-number')
 const $computerDeckNumber = $('#computer-deck-number')
@@ -74,14 +74,14 @@ const shuffleDeck = (deck) => {
 //win condition: when one array reaches 52.
 const checkWin = () => {
 
-    if (player.length === 52 && computer.length === 0) {
+    if (player.length >= 52 && computer.length === 0) {
         $result.text('You\'ve won the war lich!')
 
         setTimeout(() => {
             $result.text('')
         }, 2000)
 
-    } else if (player.length === 0 && computer.length === 52){
+    } else if (player.length === 0 && computer.length >= 52){
         $result.text('You\'ve lost the battle lich!')
 
         setTimeout(() => {
@@ -97,8 +97,8 @@ const checkWin = () => {
 const playCard = () => {
     $computerDeckNumber.text(`${computer.length} minions`)
     $playerDeckNumber.text(`${player.length} minions`)
+
     let playerNum = player.shift()
-    // console.log(playerNum)
     //// storing first number of the computer array
     let computerNum = computer.shift()
     //displays number on forehead of skull
@@ -133,14 +133,14 @@ const playCard = () => {
 
 //startgame function//
 const startGame = () => {
-        playCard()
-
     if (player.length === 52 && computer.length === 0) {
         checkWin()
 
     } else if (player.length === 0) {
         checkWin()
 
+    } else {
+        playCard()
     }
 }
 // const themeSwitcher = () => {
