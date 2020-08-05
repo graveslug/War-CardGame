@@ -1,4 +1,4 @@
-//ties dom to javascript indefiently
+//Constaly making jQuery
 const $result = $('#result');
 const $playerDeckNumber = $('#player-deck-number')
 const $computerDeckNumber = $('#computer-deck-number')
@@ -13,6 +13,8 @@ const $burzumWar = $('#burzum-war')
 const $title = $('.title')
 const $playerNum = $('#player-num')
 const $computerNum = $('#computer-num')
+
+
 //Default array: an array that holds 52 numbers that contains 4 repeats of each number from 1-13
 
 const deck = [1,1,1,1,
@@ -49,8 +51,6 @@ const splitDeck = (deck) => {
         player = deck.splice(0, split)
         //inputs second half into computer array
         computer = deck.splice(- split)
-        // console.log(player)
-        // console.log(computer)
 }
 
 //a function that mutates the array by randomizing it.
@@ -58,7 +58,7 @@ const shuffleDeck = (deck) => {
     //An explaination of the for loop
     //we will loop from back to front decrementing by one until it reaches zero.
     for(let i = deck.length - 1; i > 0; i--){
-        //this generates a ranom number and muiltiples by 52
+        //this generates a random number and muiltiples by 52
         const j = Math.floor(Math.random() * i)
         //tempValue acts holder for the index of deck[i]
         const tempValue = deck[i]
@@ -70,20 +70,15 @@ const shuffleDeck = (deck) => {
     }
     splitDeck(deck) //passing the shuffled array into it.
 }
-// console.log(player)
-// console.log(computer)
 
 //win condition: when one array reaches 52.
 const checkWin = () => {
-    //if player === 52 && computer === 0
-    if (player.length === 52 && computer.length === 0) {
-        //YOU WIN!
-        console.log('you win')
 
-        //else if player === 0 && computer === 52
+    if (player.length === 52 && computer.length === 0) {
+        prompt('You won the Necromancers war!')
+
     } else if (player.length === 0 && computer.length === 52){
-        //you lose!
-        console.log('You lose!') //test. change to displaya  modal or something
+        prompt('You lost the Necromancers War!')
     } else{
         playCard()
     }
@@ -109,74 +104,54 @@ const playCard = () => {
         }, 2000)
 
         doubleNumber.push(playerNum, computerNum)
-        // console.log(doubleNumber)
+
         playCard()
-        // console.log(playerNum)
-        // console.log(computerNum)
-        //console.log(doubleNumber)
+
     } else if (playerNum > computerNum){
-        //console.log(`Your card is higher!`)
-        //return both numbers to player via push()
+
         player.push(playerNum, computerNum, ...doubleNumber)
         doubleNumber = []
-        $roundResult.text('You won the fight!')
-        // player.push(doubleNumber)
-        //most likely playerNum.push() && computerNum.push() to player array
-        // console.log(doubleNumber)
-        // console.log(player)
-        // console.log(computer)
+        $roundResult.text('You took their minions!')
+
     } else {
-        //console.log(`Their card is higher!`)
-        //return both numbers to computer via push()
-        //most likely playerNum.push() && computerNum.push() to computer array
-        // console.log(doubleNumber)
+
         computer.push(computerNum, playerNum, ...doubleNumber)
         doubleNumber = []
-        $roundResult.text('They won the fight!')
+        $roundResult.text('They took your minions!')
 
-        // computer.concat(doubleNumber)
-        // console.log(player)
-        // console.log(computer)
     }
 }
 
 //startgame function//
 const startGame = () => {
         playCard()
-    //console.log(player)
-    //console.log(computer)
+
     if (player.length === 52 && computer.length === 0) {
         $result.text('You\'ve won the war lich!')
 
         setTimeout(() => {
             $result.text('')
         }, 2000)
-        startGame()
+
     } else if (player.length === 0) {
         $result.text('You\'ve lost the battle lich!')
 
         setTimeout(() => {
             $result.text('')
         }, 2000)
-        startGame()
+
     }
 }
 // const themeSwitcher = () => {
 //     // $(somethingsomething).toggleClass(something)
 // }
 
-//console.log(doubleNumber)
-// console.log(currentCardCounter(player))
-// console.log(currentCardCounter(computer))
-
 
 shuffleDeck(deck)
 startGame()
 
-// EVENT LISTENER PARTY FOR THE COOL KIDS //
+// SHHHH THE EVENTS ARE LISTENING //
 $($playGame).on('click', startGame)
 $($restart).click(function() {
     location.reload();
 });
-
-//$burzumWar.text('WAAAAAARRRR!')
