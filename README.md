@@ -20,4 +20,5 @@ If I kept to my Necromancer's War theme I would animate the skeletons heads more
 Overall I'm content with the project and look forward to the next. I achieved what I had set out to do and done just that.
 
 
-struggles: In particular would've been getting the playGame and checkWin functions to work and behave correctly. Starting the game and ending the game seemed to be the roadblocks for me. 
+struggles: In particular would've been getting the playGame and checkWin functions to work and behave correctly. Starting the game and ending the game seemed to be the roadblocks for me.
+Another road block that I hit but overcame was figuring out how to transfer muiltiple numbers during the war sequence which required an overall of four numbers to push. The way I overcame that was to declare another global array and used that as a storage container for the two extra numbers so that I can later take that array and transfer all numbers into the winners array. 
